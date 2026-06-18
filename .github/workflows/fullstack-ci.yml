@@ -2,9 +2,9 @@ name: Fullstack CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: {}
 
 jobs:
@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [backend/api-gateway, backend/auth-service, backend/movie-service]
+        service:
+          [backend/api-gateway, backend/auth-service, backend/movie-service]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Java 17
