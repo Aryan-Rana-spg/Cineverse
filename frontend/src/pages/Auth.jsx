@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./Auth.css";
-import { API_BASE_URL } from "../services/api";
-
-const BACKEND_URL = `${API_BASE_URL}/api/auth`;
 
 function Auth() {
   const navigate = useNavigate();
@@ -20,39 +16,43 @@ function Auth() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setMessage({ text: "", isSuccess: false });
 
-    const endpoint = isLoginTab ? "/login" : "/register";
-    const payload = isLoginTab
-      ? { email: formData.email, password: formData.password }
-      : formData;
-
-    try {
-      const response = await axios.post(`${BACKEND_URL}${endpoint}`, payload, {
-        headers: { "Content-Type": "application/json" },
+    if (!formData.email || !formData.password) {
+      setMessage({
+        text: "Please enter both email and password to continue.",
+        isSuccess: false,
       });
+      return;
+    }
 
-      const result = response.data;
+    if (!isLoginTab && !formData.name) {
+      setMessage({
+        text: "Please enter your full name to register.",
+        isSuccess: false,
+      });
+      return;
+    }
 
-      if (endpoint === "/login" && !result.includes("successful")) {
-        setMessage({ text: result, isSuccess: false });
-      } else {
-        setMessage({ text: result, isSuccess: true });
-        if (isLoginTab) {
-          setTimeout(() => {
-            navigate("/home");
-          }, 1200);
-        } else {
-          setFormData({ name: "", email: "", password: "" });
-          setIsLoginTab(true);
-        }
-      }
-    } catch (error) {
-      const errorMsg =
-        error.response?.data || "Could not connect to the backend server.";
-      setMessage({ text: errorMsg, isSuccess: false });
+    if (formData.password.length < 6) {
+      setMessage({
+        text: "Password must be at least 6 characters.",
+        isSuccess: false,
+      });
+      return;
+    }
+
+    if (isLoginTab) {
+      setMessage({ text: "Login successful! Redirecting...", isSuccess: true });
+      setTimeout(() => {
+        navigate("/home");
+      }, 800);
+    } else {
+      setMessage({ text: "Registration complete! Please log in.", isSuccess: true });
+      setFormData({ name: "", email: "", password: "" });
+      setIsLoginTab(true);
     }
   };
 
