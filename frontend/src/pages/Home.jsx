@@ -32,8 +32,8 @@ function Home() {
           <span className="hero-badge">NOW STREAMING</span>
           <h1 className="hero-title">Explore the Universe of Cinema</h1>
           <p className="hero-description">
-            Stream unlimited high-definition movies and enjoy a polished frontend-only
-            experience powered entirely by the browser.
+            Stream unlimited high-definition movies and enjoy a polished
+            frontend-only experience powered entirely by the browser.
           </p>
           <div className="hero-buttons">
             <button className="btn-play">► Play Now</button>

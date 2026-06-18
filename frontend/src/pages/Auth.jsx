@@ -50,7 +50,10 @@ function Auth() {
         navigate("/home");
       }, 800);
     } else {
-      setMessage({ text: "Registration complete! Please log in.", isSuccess: true });
+      setMessage({
+        text: "Registration complete! Please log in.",
+        isSuccess: true,
+      });
       setFormData({ name: "", email: "", password: "" });
       setIsLoginTab(true);
     }
