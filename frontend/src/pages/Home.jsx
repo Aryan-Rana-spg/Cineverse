@@ -9,7 +9,8 @@ const mockMovies = [
     rating: "8.8",
     imageUrl:
       "https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1000&auto=format&fit=crop",
-    description: "A mind-bending thriller about dreams, reality, and hidden memories.",
+    description:
+      "A mind-bending thriller about dreams, reality, and hidden memories.",
   },
   {
     id: 2,
@@ -18,7 +19,8 @@ const mockMovies = [
     rating: "9.0",
     imageUrl:
       "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=1000&auto=format&fit=crop",
-    description: "The caped crusader faces a chilling new threat from Gotham's Joker.",
+    description:
+      "The caped crusader faces a chilling new threat from Gotham's Joker.",
   },
   {
     id: 3,
@@ -27,7 +29,8 @@ const mockMovies = [
     rating: "8.6",
     imageUrl:
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=1000&auto=format&fit=crop",
-    description: "A space mission across galaxies searching for humanity's next home.",
+    description:
+      "A space mission across galaxies searching for humanity's next home.",
   },
   {
     id: 4,
@@ -36,7 +39,8 @@ const mockMovies = [
     rating: "8.9",
     imageUrl:
       "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1000&auto=format&fit=crop",
-    description: "An iconic crime saga with interwoven stories and unforgettable dialogue.",
+    description:
+      "An iconic crime saga with interwoven stories and unforgettable dialogue.",
   },
   {
     id: 5,
@@ -54,7 +58,8 @@ const mockMovies = [
     rating: "8.7",
     imageUrl:
       "https://images.unsplash.com/photo-1514516870924-778e41c553c8?q=80&w=1000&auto=format&fit=crop",
-    description: "A hacker discovers the world is a simulation and must fight for freedom.",
+    description:
+      "A hacker discovers the world is a simulation and must fight for freedom.",
   },
 ];
 
@@ -75,17 +80,23 @@ function Home() {
   };
 
   const handlePlayNow = () => {
-    setAlertMessage("Enjoy the featured collection — all movie details are demo content.");
+    setAlertMessage(
+      "Enjoy the featured collection — all movie details are demo content.",
+    );
     clearAlert();
   };
 
   const handleMoreInfo = () => {
-    setAlertMessage("Scroll down to explore trending titles and view sample movie cards.");
+    setAlertMessage(
+      "Scroll down to explore trending titles and view sample movie cards.",
+    );
     clearAlert();
   };
 
   const handleCardClick = (movie) => {
-    setAlertMessage(`You clicked '${movie.title}'. This is a demo preview card.`);
+    setAlertMessage(
+      `You clicked '${movie.title}'. This is a demo preview card.`,
+    );
     clearAlert();
   };
 
@@ -105,7 +116,13 @@ function Home() {
           ))}
         </nav>
         <div className="navbar-profile">
-          <div className="profile-avatar" onClick={() => { setAlertMessage("Profile clicked. This is a demo experience."); clearAlert(); }}>
+          <div
+            className="profile-avatar"
+            onClick={() => {
+              setAlertMessage("Profile clicked. This is a demo experience.");
+              clearAlert();
+            }}
+          >
             A
           </div>
         </div>
@@ -117,8 +134,8 @@ function Home() {
           <span className="hero-badge">NOW STREAMING</span>
           <h1 className="hero-title">Explore the Universe of Cinema</h1>
           <p className="hero-description">
-            Dive into a polished frontend experience with interactive demo movie cards,
-            playable buttons, and immersive visual styling.
+            Dive into a polished frontend experience with interactive demo movie
+            cards, playable buttons, and immersive visual styling.
           </p>
           <div className="hero-buttons">
             <button className="btn-play" onClick={handlePlayNow}>
@@ -142,7 +159,11 @@ function Home() {
               onClick={() => handleCardClick(movie)}
             >
               <div className="movie-poster-wrapper">
-                <img src={movie.imageUrl} alt={movie.title} className="movie-poster" />
+                <img
+                  src={movie.imageUrl}
+                  alt={movie.title}
+                  className="movie-poster"
+                />
               </div>
               <div className="movie-details">
                 <h3>{movie.title}</h3>

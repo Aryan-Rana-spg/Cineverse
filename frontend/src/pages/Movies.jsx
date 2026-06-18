@@ -8,21 +8,24 @@ const movies = [
     title: "Starship Saga",
     genre: "Science Fiction",
     rating: "8.7",
-    description: "A crew of explorers travels beyond the edge of the known universe.",
+    description:
+      "A crew of explorers travels beyond the edge of the known universe.",
   },
   {
     id: 2,
     title: "City of Shadows",
     genre: "Thriller",
     rating: "8.3",
-    description: "A detective must navigate a neon city full of secrets and danger.",
+    description:
+      "A detective must navigate a neon city full of secrets and danger.",
   },
   {
     id: 3,
     title: "Epic Quest",
     genre: "Fantasy",
     rating: "8.4",
-    description: "A band of heroes races to recover an ancient artifact before time runs out.",
+    description:
+      "A band of heroes races to recover an ancient artifact before time runs out.",
   },
 ];
 
@@ -33,7 +36,8 @@ function Movies() {
       <main className="dashboard-content">
         <h2 className="row-title">Movie Catalog</h2>
         <p className="hero-description">
-          Browse the demo movie collection. Each card is an interactive preview for the frontend-only experience.
+          Browse the demo movie collection. Each card is an interactive preview
+          for the frontend-only experience.
         </p>
         <div className="movies-grid">
           {movies.map((movie) => (

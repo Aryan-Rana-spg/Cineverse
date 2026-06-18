@@ -8,21 +8,24 @@ const tvShows = [
     title: "Midnight Run",
     genre: "Mystery",
     rating: "8.1",
-    description: "A small town investigation reveals a far-reaching conspiracy.",
+    description:
+      "A small town investigation reveals a far-reaching conspiracy.",
   },
   {
     id: 2,
     title: "Pulse",
     genre: "Drama",
     rating: "8.5",
-    description: "A character-driven series about ambition, risk, and redemption.",
+    description:
+      "A character-driven series about ambition, risk, and redemption.",
   },
   {
     id: 3,
     title: "Quantum Nights",
     genre: "Sci-Fi",
     rating: "8.9",
-    description: "A scientist uncovers a parallel reality with unexpected consequences.",
+    description:
+      "A scientist uncovers a parallel reality with unexpected consequences.",
   },
 ];
 
@@ -33,7 +36,8 @@ function TVShows() {
       <main className="dashboard-content">
         <h2 className="row-title">TV Shows</h2>
         <p className="hero-description">
-          Explore what’s currently available in the frontend-only TV show demo section.
+          Explore what’s currently available in the frontend-only TV show demo
+          section.
         </p>
         <div className="movies-grid">
           {tvShows.map((show) => (

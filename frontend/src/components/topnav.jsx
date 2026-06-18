@@ -18,9 +18,7 @@ function TopNav() {
           <NavLink
             key={item.to}
             to={item.to}
-            className={({ isActive }) =>
-              `nav-link${isActive ? " active" : ""}`
-            }
+            className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
           >
             {item.label}
           </NavLink>
