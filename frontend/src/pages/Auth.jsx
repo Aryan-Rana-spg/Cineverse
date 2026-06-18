@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
+import { API_BASE_URL } from "../services/api";
 
-const BACKEND_URL = "http://localhost:8080/api/auth";
+const BACKEND_URL = `${API_BASE_URL}/api/auth`;
 
 function Auth() {
   const navigate = useNavigate();
