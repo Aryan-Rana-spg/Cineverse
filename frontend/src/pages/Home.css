@@ -159,6 +159,15 @@
   padding-top: var(--navbar-height);
 }
 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(229, 9, 20, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08), transparent 32%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .hero-content {
   max-width: 600px;
   z-index: 2;
@@ -212,23 +221,24 @@
   transition: var(--transition-smooth);
 }
 
-.btn-play {
-  background-color: var(--text-primary);
-  color: #000;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
-}
-
-.btn-play:hover {
-  background-color: #e2e8f0;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
-}
-
-.btn-info {
-  background-color: rgba(255, 255, 255, 0.08);
+.hero-alert {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
+  font-size: 0.95rem;
+  max-width: 520px;
+  line-height: 1.5;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+.movie-description {
+  margin: 0.8rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .btn-info:hover {
