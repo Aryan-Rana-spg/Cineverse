@@ -1,158 +1,131 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Home.css";
 
 function Home() {
-  const navigate = useNavigate();
-
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/movies")
+      .get("http://localhost:8080/api/movies")
       .then((response) => {
         setMovies(response.data);
-        setLoading(false);
       })
       .catch((err) => {
-        console.error("Error communicating with movie-service:", err);
-        setError("Failed to fetch movies from the backend microservice.");
-        setLoading(false);
+        console.error(err);
+        setError(
+          "Failed to fetch trending titles. Please verify the Movie Microservice engine.",
+        );
       });
   }, []);
 
-  const handleLogout = () => {
-    navigate("/auth");
-  };
-
   return (
-    <div style={styles.dashboardContainer}>
-      {/* Navbar section */}
-      <header style={styles.navbar}>
-        <div style={styles.logo}>🎬 Cineverse</div>
-        <button onClick={handleLogout} style={styles.logoutBtn}>
-          Log Out
-        </button>
+    <div className="dashboard-container">
+      {/* Cinematic Navigation Header */}
+      <header className="dashboard-navbar">
+        <div className="navbar-logo">CINEVERSE</div>
+        <nav className="navbar-links">
+          <span className="nav-link active">Home</span>
+          <span className="nav-link">Movies</span>
+          <span className="nav-link">TV Shows</span>
+          <span className="nav-link">My List</span>
+        </nav>
+        <div className="navbar-profile">
+          <div className="profile-avatar">A</div>
+        </div>
       </header>
 
-      {/* Core Welcome Panel */}
-      <section style={styles.heroSection}>
-        <h1>Welcome to Your Dashboard</h1>
-        <p>
-          Explore trending movies, manage reviews, and customize your experience
-          across our microservices.
-        </p>
+      {/* Immersive Hero Spotlight Banner */}
+      <section className="hero-banner">
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <span className="hero-badge">NOW STREAMING</span>
+          <h1 className="hero-title">Explore the Universe of Cinema</h1>
+          <p className="hero-description">
+            Stream unlimited high-definition movies, track your watchlists, and
+            witness architectural microservice integration seamlessly processing
+            data in real-time.
+          </p>
+          <div className="hero-buttons">
+            <button className="btn-play">► Play Now</button>
+            <button className="btn-info">ⓘ More Info</button>
+          </div>
+        </div>
       </section>
 
-      {/* Movies Grid Shell */}
-      <main style={styles.contentSection}>
-        <h2 style={styles.sectionTitle}>Trending Content</h2>
+      {/* Main Content Area */}
+      <main className="dashboard-content">
+        <h2 className="row-title">Trending Content</h2>
 
-        {loading && (
-          <p style={{ color: "#aaa" }}>
-            Loading live cinematic library matrix...
-          </p>
-        )}
-        {error && <p style={{ color: "#E50914" }}>{error}</p>}
-
-        {!loading && !error && (
-          <div style={styles.movieGrid}>
-            {movies.map((movie) => (
-              <div key={movie.id} style={styles.movieCard}>
-                {/* Fallback pattern handles both camelCase and snake_case properties seamlessly */}
-                <img
-                  src={movie.imageUrl || movie.image_url}
-                  alt={movie.title}
-                  style={styles.poster}
-                />
-                <div style={styles.movieDetails}>
-                  <h3 style={styles.movieTitle}>{movie.title}</h3>
-                  <span style={styles.genreBadge}>{movie.genre}</span>
-                  <div style={styles.rating}>⭐ {movie.rating}/10</div>
-                </div>
-              </div>
-            ))}
+        {error ? (
+          <div className="error-card-banner">
+            <span className="error-icon">⚠️</span>
+            <p>{error}</p>
+          </div>
+        ) : (
+          <div className="movies-grid">
+            {movies.length === 0
+              ? /* Fallback Mock Data Display if your DB table is empty so the UI still looks full */
+                [
+                  { id: 1, title: "Inception", genre: "Sci-Fi", rating: "8.8" },
+                  {
+                    id: 2,
+                    title: "The Dark Knight",
+                    genre: "Action",
+                    rating: "9.0",
+                  },
+                  {
+                    id: 3,
+                    title: "Interstellar",
+                    genre: "Adventure",
+                    rating: "8.6",
+                  },
+                  {
+                    id: 4,
+                    title: "Pulp Fiction",
+                    genre: "Crime",
+                    rating: "8.9",
+                  },
+                ].map((movie) => (
+                  <div key={movie.id} className="movie-card">
+                    <div className="card-image-placeholder">
+                      <span className="poster-icon">🎬</span>
+                    </div>
+                    <div className="movie-details">
+                      <h3>{movie.title}</h3>
+                      <div className="movie-meta">
+                        <span className="movie-genre">{movie.genre}</span>
+                        <span className="movie-rating">⭐ {movie.rating}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : /* Dynamic Database Content Render */
+                movies.map((movie) => (
+                  <div key={movie.id} className="movie-card">
+                    <img
+                      src={
+                        movie.imageUrl ||
+                        "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1000&auto=format&fit=crop"
+                      }
+                      alt={movie.title}
+                      className="movie-poster"
+                    />
+                    <div className="movie-details">
+                      <h3>{movie.title}</h3>
+                      <div className="movie-meta">
+                        <span className="movie-genre">{movie.genre}</span>
+                        <span className="movie-rating">⭐ {movie.rating}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         )}
       </main>
     </div>
   );
 }
-
-const styles = {
-  dashboardContainer: {
-    minHeight: "100vh",
-    backgroundColor: "#141414",
-    color: "#ffffff",
-    fontFamily: "Segoe UI, Roboto, sans-serif",
-  },
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "15px 40px",
-    backgroundColor: "#090909",
-    borderBottom: "1px solid #222",
-  },
-  logo: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    color: "#E50914",
-    letterSpacing: "1px",
-  },
-  logoutBtn: {
-    padding: "8px 16px",
-    backgroundColor: "#E50914",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-  heroSection: {
-    textAlign: "center",
-    padding: "60px 20px",
-    background: "linear-gradient(180deg, #1f1f1f 0%, #141414 100%)",
-  },
-  contentSection: { padding: "0 40px 40px 40px" },
-  sectionTitle: {
-    fontSize: "22px",
-    marginBottom: "20px",
-    borderBottom: "2px solid #E50914",
-    display: "inline-block",
-    paddingBottom: "5px",
-  },
-  movieGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-    gap: "25px",
-  },
-  movieCard: {
-    backgroundColor: "#1f1f1f",
-    borderRadius: "8px",
-    overflow: "hidden",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-    transition: "transform 0.2s",
-  },
-  poster: { width: "100%", height: "240px", objectFit: "cover" },
-  movieDetails: { padding: "12px" },
-  movieTitle: {
-    fontSize: "16px",
-    margin: "0 0 8px 0",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  genreBadge: {
-    fontSize: "12px",
-    backgroundColor: "#333",
-    padding: "3px 8px",
-    borderRadius: "12px",
-    marginRight: "8px",
-  },
-  rating: { fontSize: "13px", color: "#ffc107", marginTop: "8px" },
-};
 
 export default Home;

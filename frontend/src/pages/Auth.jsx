@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
-// Updated to point through the API Gateway with the route path predicate rule prefix
 const BACKEND_URL = "http://localhost:8080/api/auth";
 
 function Auth() {
-  const navigate = useNavigate(); // Hook initialized for handling page routing
+  const navigate = useNavigate();
   const [isLoginTab, setIsLoginTab] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -40,14 +39,13 @@ function Auth() {
         setMessage({ text: result, isSuccess: false });
       } else {
         setMessage({ text: result, isSuccess: true });
-
-        // Handling routing and resetting form based on current view state
         if (isLoginTab) {
           setTimeout(() => {
             navigate("/home");
-          }, 1200); // 1.2 second delay allows the user to read the success banner
+          }, 1200);
         } else {
           setFormData({ name: "", email: "", password: "" });
+          setIsLoginTab(true);
         }
       }
     } catch (error) {
@@ -66,7 +64,6 @@ function Auth() {
           {message.text}
         </div>
       )}
-
       <div className="auth-container">
         <div className="tab-headers">
           <button
@@ -88,9 +85,7 @@ function Auth() {
             Register
           </button>
         </div>
-
         <h2>{isLoginTab ? "Welcome Back" : "Create Account"}</h2>
-
         <form onSubmit={handleSubmit}>
           {!isLoginTab && (
             <input

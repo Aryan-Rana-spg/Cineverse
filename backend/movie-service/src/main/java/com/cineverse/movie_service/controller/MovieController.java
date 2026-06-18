@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class MovieController {
 
     private final MovieRepository movieRepository;
